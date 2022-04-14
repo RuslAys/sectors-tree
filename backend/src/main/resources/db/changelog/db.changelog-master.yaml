@@ -1,0 +1,180 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: Ruslan Aysin
+      changes:
+        - sql:
+            dbms: "postgresql"
+            splitStatements: true
+            sql: CREATE SEQUENCE sectors_sequence START 69;
+              CREATE SEQUENCE sessions_sequence START 1;
+        - createTable:
+            tableName: sectors
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  defaultValueComputed: nextval('sectors_sequence')
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: pk_sectors_id
+              - column:
+                  name: name
+                  type: varchar(500)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: parent_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_sectors_parent_id
+                    references: sectors(id)
+              - column:
+                  name: active
+                  type: boolean
+                  defaultValue: false
+                  constraints:
+                    nullable: false
+        - sql:
+            dbms: "postgresql"
+            splitStatements: true
+            sql: INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(1, 'Manufacturing', NULL, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(2, 'Food and Beverage', 1, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(3, 'Bakery & confectionery products', 2, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(4, 'Sweets & snack food', 2, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(5, 'Meat & meat products', 2, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(6, 'Milk & dairy products', 2, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(7, 'Fish & fish products', 2, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(8, 'Other', 2, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(9, 'Beverages', 2, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(10, 'Printing', 1, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(11, 'Book/Periodicals printing', 10, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(12, 'Labelling and packaging printing', 10, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(13, 'Advertising', 10, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(14, 'Construction materials', 1, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(15, 'Wood', 1, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(16, 'Other (Wood)', 15, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(17, 'Wooden houses', 15, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(18, 'Wooden building materials', 15, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(19, 'Metalworking', 1, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(20, 'Construction of metal structures', 19, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(21, 'Houses and buildings', 19, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(22, 'Metal products', 19, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(23, 'Metal works', 19, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(24, 'Gas, Plasma, Laser cutting', 23, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(25, 'CNC-machining', 23, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(26, 'Forgings, Fasteners', 23, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(27, 'MIG, TIG, Aluminum welding', 23, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(28, 'Plastic and Rubber', 1, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(29, 'Plastic goods', 28, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(30, 'Plastic processing technology', 28, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(31, 'Plastics welding and processing', 30, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(32, 'Blowing', 30, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(33, 'Moulding', 30, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(34, 'Plastic profiles', 28, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(35, 'Packaging', 28, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(36, 'Service', 1, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(37, 'Information Technology and Telecommunications', 36, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(38, 'Data processing, Web portals, E-marketing', 37, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(39, 'Telecommunications', 37, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(40, 'Programming, Consultancy', 37, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(41, 'Software, Hardware', 37, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(42, 'Tourism', 36, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(43, 'Engineering', 36, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(44, 'Transport and Logistics', 36, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(45, 'Rail', 44, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(46, 'Road', 44, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(47, 'Air', 44, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(48, 'Water', 44, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(49, 'Translation services', 36, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(50, 'Business services', 36, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(51, 'Furniture', 1, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(52, 'Bathroom/sauna', 51, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(53, 'Living room', 51, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(54, 'Project furniture', 51, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(55, 'Office', 51, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(56, 'Bedroom', 51, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(57, 'Children`s room', 51, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(58, 'Kitchen', 51, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(59, 'Other (Furniture)', 51, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(60, 'Outdoor', 51, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(61, 'Textile and Clothing', 1, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(62, 'Textile', 61, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(63, 'Clothing', 61, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(64, 'Other', 1, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(65, 'Energy technology', 64, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(66, 'Creative industries', 64, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(67, 'Environment', 64, true);
+              INSERT INTO public.sectors (id, "name", parent_id, active) VALUES(68, 'Electronics and Optics', 1, true);
+        - createTable:
+            tableName: sessions
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  defaultValueComputed: nextval('sessions_sequence')
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: pk_sessions_id
+              - column:
+                  name: start_time
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
+                  name: end_time
+                  type: timestamp
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: user_sectors
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  defaultValueComputed: nextval('sectors_sequence')
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: pk_user_sectors_id
+              - column:
+                  name: username
+                  type: varchar(500)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: agreed_to_terms
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: session_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_user_sectors_sessions_id
+                    references: sessions(id)
+                    nullable: false
+        - createTable:
+            tableName: user_sectors_to_sectors
+            columns:
+              - column:
+                  name: user_sector_id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: pk_usts_user_sector_id
+              - column:
+                  name: sector_id
+                  type: bigint
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: pk_usts_sector_id
+        - addUniqueConstraint:
+            columnNames: id, session_id
+            tableName: user_sectors
+            constraintName: unq_user_sectors_id_session_id
+
